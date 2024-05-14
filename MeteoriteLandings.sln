@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoriteLandings", "MeteoriteLandings\MeteoriteLandings\MeteoriteLandings.csproj", "{0D10E54B-DCF9-4C6F-9802-7BE0E2124C29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoriteLandings.Client", "MeteoriteLandings\MeteoriteLandings.Client\MeteoriteLandings.Client.csproj", "{D84D0F80-60A8-4C1B-8C85-42AC402D63B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoriteLandings.Data", "MeteoriteLandings.Data\MeteoriteLandings.Data.csproj", "{64F5F584-5FF2-4614-953F-42CF3DB1A0F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D10E54B-DCF9-4C6F-9802-7BE0E2124C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D10E54B-DCF9-4C6F-9802-7BE0E2124C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D10E54B-DCF9-4C6F-9802-7BE0E2124C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D10E54B-DCF9-4C6F-9802-7BE0E2124C29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84D0F80-60A8-4C1B-8C85-42AC402D63B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84D0F80-60A8-4C1B-8C85-42AC402D63B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84D0F80-60A8-4C1B-8C85-42AC402D63B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84D0F80-60A8-4C1B-8C85-42AC402D63B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64F5F584-5FF2-4614-953F-42CF3DB1A0F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64F5F584-5FF2-4614-953F-42CF3DB1A0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64F5F584-5FF2-4614-953F-42CF3DB1A0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64F5F584-5FF2-4614-953F-42CF3DB1A0F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D4B48F8-BE2B-48C5-BD85-440D9C5308EE}
+	EndGlobalSection
+EndGlobal

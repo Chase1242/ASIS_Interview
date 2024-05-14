@@ -1,0 +1,74 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject IMeteorites meteors
+
+<MapView Zoom="3" Style="height: 600px; width: 100%;">
+    <WebMap>
+        <PortalItem Id="4a6cb60ebbe3483a805999d481c2daa5"/>
+            <GraphicsLayer>
+                @foreach (Meteorite meteor in Meteorites)
+                {
+                    <Graphic>
+                        <Point Longitude="meteor.Reclat" Latitude="meteor.Reclong" />
+                        <SimpleMarkerSymbol Color="@(new MapColor(226, 119, 40))">
+                            <Outline Color="@(new MapColor(255, 255, 255))" Width="1" />
+                        </SimpleMarkerSymbol>
+                    </Graphic>
+                }
+            </GraphicsLayer>
+    </WebMap>
+    <ScaleBarWidget Position="OverlayPosition.BottomLeft" />
+</MapView>
+
+<p>The number of meteorites is @meteors.GetMeteorites().Count()</p>
+<p>The number of @SelectedMets's is @meteors.GetMeteorites().Where(i => i.Recclass.ToLower() == this.SelectedMets.ToLower()).Count()</p>
+<p>Showing the first @MeteorCount.</p>
+<select @onchange="OnSelect">
+    <option value="None">Show first 100</option>
+    @foreach (string val in meteors.GetMeteorites().Select(i => i.Recclass).Distinct())
+    {
+        <option value="@val">Show all @val's</option>
+    }
+</select>
+
+<ApexChart TItem="Data"
+           Title="Meteorites by category">
+
+    <ApexPointSeries TItem="Data"
+                     Items="this.Counts"
+                     Name="Number of meteorites"
+                     XValue="@(e => e.Name)"
+                     YValue="@(e => e.Count)"
+                     OrderByDescending="e=>e.Y"
+                     SeriesType="SeriesType.Bar" />
+</ApexChart>
+@code {
+    public IEnumerable<Meteorite> Meteorites { get; set; }
+    public string SelectedMets { get; set; } = "";
+    public long MeteorCount { get; set; }
+
+    public IEnumerable<Data> Counts { get; set; }
+
+    protected override Task OnParametersSetAsync()
+    {
+        this.Meteorites = meteors.GetMeteorites().Take(100);
+        this.Counts = meteors.GetMeteorites().GroupBy(i => i.Recclass).Select(i => new Data { Name = i.Key, Count = i.Select(j => j.Recclass).Count() });
+        return base.OnParametersSetAsync();
+    }
+
+    protected async Task OnSelect(ChangeEventArgs e)
+    {
+        string val = e.Value.ToString();
+        this.SelectedMets = val;
+        this.Meteorites = (val.ToLower() == "none") ? meteors.GetMeteorites().Take(100) : meteors.GetMeteorites().Where(i => i.Recclass.ToLower() == val.ToLower());
+        this.MeteorCount = this.Meteorites.Take(100).Count();
+        this.Meteorites = this.Meteorites.Take(100);
+        StateHasChanged();
+    }
+
+    public class Data
+    {
+        public string Name { get; set; }
+        public int Count { get; set; }
+    }
+} 
