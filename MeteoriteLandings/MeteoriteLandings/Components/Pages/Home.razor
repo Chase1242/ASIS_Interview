@@ -21,8 +21,11 @@
 </MapView>
 
 <p>The number of meteorites is @meteors.GetMeteorites().Count()</p>
-<p>The number of @SelectedMets's is @meteors.GetMeteorites().Where(i => i.Recclass.ToLower() == this.SelectedMets.ToLower()).Count()</p>
+<p style="display: @(@meteors.GetMeteorites().Where(i => i.Recclass.ToLower() == this.SelectedMets.ToLower()).Count() == 0 ? "none" : "block")">The number of @SelectedMets's is @meteors.GetMeteorites().Where(i => i.Recclass.ToLower() == this.SelectedMets.ToLower()).Count()</p>
 <p>Showing the first @MeteorCount.</p>
+<p>This number of meteorites fell: @this.meteors.GetMeteorites().Where(i => i.Fall == Fall.Fell).Count()</p>
+<p>This number of meteorites were found: @this.meteors.GetMeteorites().Where(i => i.Fall == Fall.Found).Count() (Didn't they all fall?)</p>
+
 <select @onchange="OnSelect">
     <option value="None">Show first 100</option>
     @foreach (string val in meteors.GetMeteorites().Select(i => i.Recclass).Distinct())
@@ -52,6 +55,7 @@
     protected override Task OnParametersSetAsync()
     {
         this.Meteorites = meteors.GetMeteorites().Take(100);
+        this.MeteorCount = Meteorites.Count();
         this.Counts = meteors.GetMeteorites().GroupBy(i => i.Recclass).Select(i => new Data { Name = i.Key, Count = i.Select(j => j.Recclass).Count() });
         return base.OnParametersSetAsync();
     }
